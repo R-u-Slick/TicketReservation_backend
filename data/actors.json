@@ -1,0 +1,20 @@
+[
+    {
+        "firstName": "Vasiliy",
+        "lastName": "Pupkin",
+        "countryId": "1"      
+    },
+
+    {
+        "firstName": "Grigory",
+        "lastName": "Grigoriev",
+        "countryId": "1"      
+    },
+
+    {
+        "firstName": "Andrey",
+        "lastName": "Vorobey",
+        "countryId": "1"      
+    }
+]
+    
