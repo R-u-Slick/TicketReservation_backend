@@ -3,7 +3,6 @@ module.exports = {
     browser: true,
     commonjs: true,
     es2021: true,
-    node: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -19,6 +18,6 @@ module.exports = {
     'react',
   ],
   rules: {
-    'linebreak-style': ['error', 'windows'],
+    'linebreak-style': 0,
   },
 };
