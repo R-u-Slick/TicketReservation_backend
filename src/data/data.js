@@ -3,63 +3,95 @@ const Country = require('../models/Country');
 const Actor = require('../models/Actor');
 const Genre = require('../models/Genre');
 
-const data = [
-  {
-    modelName: Country,
-    data: { name: 'Belarus' },
-    connectedData: [
-      { modelName: City, data: { name: 'Minsk', countryId: 'ref' } },
-      { modelName: Actor, data: { firstName: 'Vasiliy', lastName: 'Pupkin', countryId: 'ref' } },
-    ],
-  },
-  {
-    modelName: Country,
-    data: { name: 'Ukraine' },
-    connectedData: [
-      { modelName: City, data: { name: 'Kiev', countryId: 'ref' } },
-      { modelName: Actor, data: { firstName: 'Grigory', lastName: 'Grigoriev', countryId: 'ref' } },
-    ],
-  },
-  {
-    modelName: Country,
-    data: { name: 'Russia' },
-    connectedData: [
-      { modelName: City, data: { name: 'Moscow', countryId: 'ref' } },
-      { modelName: Actor, data: { firstName: 'Andrey', lastName: 'Vorobey', countryId: 'ref' } },
-    ],
-  },
-  {
-    modelName: Genre,
-    data: { name: 'Drama' },
-  },
-  {
-    modelName: Genre,
-    data: { name: 'Action' },
-  },
-  {
-    modelName: Genre,
-    data: { name: 'Comedy' },
-  },
-  {
-    modelName: Genre,
-    data: { name: 'Fantasy' },
-  },
-  {
-    modelName: Genre,
-    data: { name: 'Horror' },
-  },
-  {
-    modelName: Genre,
-    data: { name: 'Mystery' },
-  },
-  {
-    modelName: Genre,
-    data: { name: 'Thriller' },
-  },
-  {
-    modelName: Genre,
-    data: { name: 'Western' },
-  },
-];
+let data = [];
+
+const belarus = new Country({
+  name: 'Belarus',
+});
+data.push(belarus);
+
+const ukraine = new Country({
+  name: 'Ukraine',
+});
+data.push(ukraine);
+
+const russia = new Country({
+  name: 'Russia',
+});
+data.push(russia);
+
+const minsk = new City({
+  name: 'Minsk',
+  countryId: belarus._id,
+});
+data.push(minsk);
+
+const kiev = new City({
+  name: 'Kiev',
+  countryId: ukraine._id,
+});
+data.push(kiev);
+
+const moscow = new City({
+  name: 'Moscow',
+  countryId: russia._id,
+});
+data.push(moscow);
+
+const pupkin = new Actor({
+  firstName: 'Vasiliy',
+  lastName: 'Pupkin',
+  countryId: belarus._id,
+});
+data.push(pupkin);
+
+const grigoriev = new Actor({
+  firstName: 'Grigory',
+  lastName: 'Grigoriev',
+  countryId: ukraine._id,
+});
+data.push(grigoriev);
+
+const vorobey = new Actor({
+  firstName: 'Andrey',
+  lastName: 'Vorobey',
+  countryId: russia._id,
+});
+data.push(vorobey);
+
+const drama = new Genre({
+  name: 'drama',
+});
+data.push(drama);
+
+const action = new Genre({
+  name: 'action',
+});
+data.push(action);
+
+const comedy = new Genre({
+  name: 'comedy',
+});
+data.push(comedy);
+
+const fantasy = new Genre({
+  name: 'fantasy',
+});
+data.push(fantasy);
+
+const horror = new Genre({
+  name: 'horror',
+});
+data.push(horror);
+
+const mystery = new Genre({
+  name: 'mystery',
+});
+data.push(mystery);
+
+const thriller = new Genre({
+  name: 'thriller',
+});
+data.push(thriller);
 
 module.exports = data;
