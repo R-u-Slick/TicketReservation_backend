@@ -1,13 +1,18 @@
-const { Router } = require('express');
-const City = require('../models/City');
-const Country = require('../models/Country');
-const Actor = require('../models/Actor');
-const Genre = require('../models/Genre');
-const data = require('../data/data');
+const { Router } = require("express");
+const City = require("../models/City");
+const Country = require("../models/Country");
+const Actor = require("../models/Actor");
+const Genre = require("../models/Genre");
+const {
+  countriesData,
+  citiesData,
+  actorsData,
+  genresData,
+} = require("../data/data");
 
 const router = Router();
 
-router.get('/dbinit', async (req, res) => {
+router.get("/dbinit", async (req, res) => {
   const modelsArray = [City, Country, Actor, Genre];
 
   async function emptyCheck(models) {
@@ -22,17 +27,21 @@ router.get('/dbinit', async (req, res) => {
     return isEmpty;
   }
 
-  async function dbFill(info) {
+  async function dbFill(info, modelName) {
     info.forEach((v) => {
-      v.save((err) => {
+      const newElement = new modelName(v);
+      newElement.save((err) => {
         if (err) return console.log(err);
-        console.log('object saved', v);
+        console.log("objected saved", newElement);
       });
     });
   }
 
   if (await emptyCheck(modelsArray)) {
-    dbFill(data);
+    dbFill(countriesData, Country);
+    dbFill(citiesData, City);
+    dbFill(actorsData, Actor);
+    dbFill(genresData, Genre);
   }
 });
 
