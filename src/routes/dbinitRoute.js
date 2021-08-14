@@ -32,7 +32,7 @@ router.get("/dbinit", async (req, res) => {
       const newElement = new modelName(v);
       newElement.save((err) => {
         if (err) return console.log(err);
-        console.log("objected saved", newElement);
+        console.log("object saved", newElement);
       });
     });
   }
