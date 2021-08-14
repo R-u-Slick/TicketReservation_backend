@@ -1,12 +1,14 @@
+const express = require("express");
+const dbinitRoute = require("./src/routes/dbinitRoute");
+const { runDatabase } = require("./config/db");
 
-const express = require('express')
-const app = express()
-const port = 3000
+const PORT = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const app = express();
+app.use(dbinitRoute);
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+app.listen(PORT, () => {
+  console.log(`App listening at http://localhost:${PORT}`);
+});
+
+runDatabase();
