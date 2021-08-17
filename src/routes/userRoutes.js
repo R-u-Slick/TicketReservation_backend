@@ -12,10 +12,10 @@ router.post(
   "/user_create",
   body("firstName")
     .isAlpha("en-US", { ignore: " " })
-    .withMessage("First name must contain only letters"),
+    .withMessage("First name can only contain letters"),
   body("lastName")
     .isAlpha("en-US", { ignore: " " })
-    .withMessage("Last name must contain only letters"),
+    .withMessage("Last name can only contain letters"),
   body("email").isEmail().withMessage("Invalid email address"),
   body("password")
     .isLength({ min: 5 })
@@ -47,5 +47,23 @@ router.post(
     });
   }
 );
+//user login
+router.post("/user_login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(400).json({
+      msg: "User with this email doesn't exist",
+      err: "invalid email",
+    });
+  }
+  const validPassword = bcrypt.compareSync(password, user.password);
+  if (!validPassword) {
+    return res
+      .status(400)
+      .json({ msg: "Invalid password", err: "Invalid password" });
+  }
+  return res.status(200).json({ msg: "Login successful" });
+});
 
 module.exports = router;

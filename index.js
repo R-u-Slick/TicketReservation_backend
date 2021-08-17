@@ -11,10 +11,6 @@ app.use(dbinitRoute);
 app.use(userRoutes);
 app.use(express.static(path.resolve(__dirname, "client")));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "index.html"));
-});
-
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`);
 });
