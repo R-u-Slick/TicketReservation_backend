@@ -9,7 +9,6 @@ const PORT = 3000;
 const app = express();
 app.use(dbinitRoute);
 app.use(userRoutes);
-app.use(express.static(path.resolve(__dirname, "client")));
 
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`);
