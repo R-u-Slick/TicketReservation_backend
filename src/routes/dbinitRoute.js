@@ -9,6 +9,7 @@ const {
   actorsData,
   genresData,
 } = require("../data/data");
+const formatResponse = require("../../config/serverResponse");
 
 const router = Router();
 
@@ -28,20 +29,28 @@ router.get("/dbinit", async (req, res) => {
   }
 
   async function dbFill(info, modelName) {
-    info.forEach((v) => {
+    info.forEach(async (v) => {
       const newElement = new modelName(v);
-      newElement.save((err) => {
-        if (err) return console.log(err);
-        console.log("object saved", newElement);
-      });
+      await newElement.save();
     });
   }
-
-  if (await emptyCheck(modelsArray)) {
-    dbFill(countriesData, Country);
-    dbFill(citiesData, City);
-    dbFill(actorsData, Actor);
-    dbFill(genresData, Genre);
+  try {
+    if (await emptyCheck(modelsArray)) {
+      dbFill(countriesData, Country);
+      dbFill(citiesData, City);
+      dbFill(actorsData, Actor);
+      dbFill(genresData, Genre);
+      return res
+        .status(201)
+        .send(formatResponse(null, null, "DBb successfully initialized"));
+    }
+    return res
+      .status(409)
+      .send(formatResponse(null, "DB filled with data", "DB filled with data"));
+  } catch (err) {
+    return res
+      .status(400)
+      .send(formatResponse(null, err, "DB initialization error"));
   }
 });
 

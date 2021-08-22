@@ -7,11 +7,12 @@ const { runDatabase } = require("./config/db");
 const PORT = 3000;
 
 const app = express();
+app.use(express.json());
 app.use(dbinitRoute);
 app.use(userRoutes);
 
 app.listen(PORT, () => {
-  console.log(`App listening at http://localhost:${PORT}`);
+  console.log(`App listening at http://localhost:${PORT}...`);
 });
 
 runDatabase();
