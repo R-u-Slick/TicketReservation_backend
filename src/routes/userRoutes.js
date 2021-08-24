@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const userController = require("../controllers/userController");
+const authMiddleware = require("../middleware/authMiddleware");
 const formatResponse = require("../helpers/serverResponse");
 const User = require("../models/User");
 
@@ -26,7 +27,7 @@ router.post("/user", async (req, res) => {
   }
 });
 // Get a list of all existing users
-router.get("/user", async (req, res) => {
+router.get("/user", authMiddleware.allowAccess(["admin"]), async (req, res) => {
   try {
     const users = await User.find({});
     return res.status(200).send(formatResponse(users, null, "Users list sent"));
@@ -37,47 +38,57 @@ router.get("/user", async (req, res) => {
   }
 });
 // Delete an existing user
-router.delete("/user", async (req, res) => {
-  try {
-    const { email } = req.body;
-    const user = await User.deleteOne({ email });
-    if (user.deletedCount) {
-      return res
-        .status(200)
-        .send(formatResponse(null, null, "User successfully deleted"));
-    }
-    throw {
-      name: "Invalid email",
-      message: `User with email ${email} doesn't exist`,
-    };
-  } catch (err) {
-    return res
-      .status(400)
-      .send(formatResponse(null, err, "User deletion error"));
-  }
-});
-// Update an existing user
-router.patch("/user", async (req, res) => {
-  try {
-    const filter = req.body.email;
-    const update = req.body;
-    const doc = await User.findOneAndUpdate({ email: filter }, update, {
-      new: true,
-      runValidators: true,
-    });
-    if (!doc) {
+router.delete(
+  "/user",
+  authMiddleware.allowAccess(["admin"]),
+  async (req, res) => {
+    try {
+      const { email } = req.body;
+      const user = await User.deleteOne({ email });
+      if (user.deletedCount) {
+        return res
+          .status(200)
+          .send(formatResponse(null, null, "User successfully deleted"));
+      }
       throw {
         name: "Invalid email",
-        message: `User with email ${filter} doesn't exist`,
+        message: `User with email ${email} doesn't exist`,
       };
+    } catch (err) {
+      return res
+        .status(400)
+        .send(formatResponse(null, err, "User deletion error"));
     }
-    return res
-      .status(200)
-      .send(formatResponse(doc, null, "User successfully updated"));
-  } catch (err) {
-    return res.status(400).send(formatResponse(null, err, "User patch error"));
   }
-});
+);
+// Update an existing user
+router.patch(
+  "/user",
+  authMiddleware.allowAccess(["admin"]),
+  async (req, res) => {
+    try {
+      const filter = req.body.email;
+      const update = req.body;
+      const doc = await User.findOneAndUpdate({ email: filter }, update, {
+        new: true,
+        runValidators: true,
+      });
+      if (!doc) {
+        throw {
+          name: "Invalid email",
+          message: `User with email ${filter} doesn't exist`,
+        };
+      }
+      return res
+        .status(200)
+        .send(formatResponse(doc, null, "User successfully updated"));
+    } catch (err) {
+      return res
+        .status(400)
+        .send(formatResponse(null, err, "User patch error"));
+    }
+  }
+);
 // User login
 router.post("/login", async (req, res) => {
   try {
@@ -99,7 +110,10 @@ router.post("/login", async (req, res) => {
         message: "Invalid password",
       };
     }
-    return res.status(200).send(formatResponse(null, null, "Login successful"));
+    const token = userController.generateAccessToken(user._id, user.role);
+    return res
+      .status(200)
+      .send(formatResponse({ token }, null, "Login successful"));
   } catch (err) {
     return res.status(400).send(formatResponse(null, err, "Login error"));
   }
