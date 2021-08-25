@@ -45,10 +45,15 @@ router.get("/dbinit", async (req, res) => {
         .status(201)
         .send(formatResponse(null, null, "DB successfully initialized"));
     }
-    throw {
-      name: "DB already filled with data",
-      message: "DB already filled with data",
-    };
+    return res
+      .status(403)
+      .send(
+        formatResponse(
+          null,
+          "DB already filled with data",
+          "DB already filled with data"
+        )
+      );
   } catch (err) {
     return res
       .status(400)

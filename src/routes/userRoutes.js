@@ -3,6 +3,8 @@ const userController = require("../controllers/userController");
 const authMiddleware = require("../middleware/authMiddleware");
 const formatResponse = require("../helpers/serverResponse");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const { key } = require("../../config/jwtKey");
 
 const router = Router();
 
@@ -34,7 +36,7 @@ router.get("/user", authMiddleware.allowAccess(["admin"]), async (req, res) => {
   } catch (err) {
     return res
       .status(400)
-      .send(formatResponse(null, err, "Can't gat a user list"));
+      .send(formatResponse(null, err, "Can't get a user list"));
   }
 });
 // Delete an existing user
@@ -50,10 +52,15 @@ router.delete(
           .status(200)
           .send(formatResponse(null, null, "User successfully deleted"));
       }
-      throw {
-        name: "Invalid email",
-        message: `User with email ${email} doesn't exist`,
-      };
+      return res
+        .status(404)
+        .send(
+          formatResponse(
+            null,
+            "Invalid email",
+            `User with email ${email} doesn't exist`
+          )
+        );
     } catch (err) {
       return res
         .status(400)
@@ -74,10 +81,15 @@ router.patch(
         runValidators: true,
       });
       if (!doc) {
-        throw {
-          name: "Invalid email",
-          message: `User with email ${filter} doesn't exist`,
-        };
+        return res
+          .status(404)
+          .send(
+            formatResponse(
+              null,
+              "Invalid email",
+              `User with email ${filter} doesn't exist`
+            )
+          );
       }
       return res
         .status(200)
@@ -95,27 +107,51 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      throw {
-        name: "Invalid email",
-        message: `User with email ${email} doesn't exist`,
-      };
+      return res
+        .status(404)
+        .send(
+          formatResponse(
+            null,
+            "Invalid email",
+            `User with email ${email} doesn't exist`
+          )
+        );
     }
     const validPassword = userController.validatePassword(
       password,
       user.password
     );
     if (!validPassword) {
-      throw {
-        name: "Invalid password",
-        message: "Invalid password",
-      };
+      return res
+        .status(401)
+        .send(formatResponse(null, "Invalid password", "Invalid password"));
     }
     const token = userController.generateAccessToken(user._id, user.role);
     return res
       .status(200)
-      .send(formatResponse({ token }, null, "Login successful"));
+      .send(formatResponse({ token, user }, null, "Login successful"));
   } catch (err) {
     return res.status(400).send(formatResponse(null, err, "Login error"));
+  }
+});
+//request user data
+router.get("/users/me", async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+      return res
+        .status(401)
+        .send(
+          formatResponse(null, "Token not found", "User is not authorized")
+        );
+    }
+    const { id: userId } = jwt.verify(token, key);
+    const user = await User.findById(userId);
+    return res.status(200).send(formatResponse(user, null, "User data sent"));
+  } catch (err) {
+    return res
+      .status(400)
+      .status(formatResponse(null, err, "user data request error"));
   }
 });
 

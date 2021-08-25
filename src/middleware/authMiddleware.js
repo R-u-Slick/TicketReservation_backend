@@ -7,23 +7,24 @@ exports.allowAccess = function (roles) {
     try {
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
-        throw {
-          name: "Token not found",
-          message: "User is not authorized",
-        };
+        return res
+          .status(401)
+          .send(
+            formatResponse(null, "Token not found", "User is not authorized")
+          );
       }
       const { role: userRole } = jwt.verify(token, key);
-      let allowAccess = false;
-      roles.forEach((role) => {
-        if (role === userRole) {
-          allowAccess = true;
-        }
-      });
+      const allowAccess = roles.includes(userRole);
       if (!allowAccess) {
-        throw {
-          name: "User have no access",
-          message: "User is not authorized to view this data",
-        };
+        return res
+          .status(401)
+          .send(
+            formatResponse(
+              null,
+              "User have no access",
+              "User is not authorized to view this data"
+            )
+          );
       }
       next();
     } catch (err) {
