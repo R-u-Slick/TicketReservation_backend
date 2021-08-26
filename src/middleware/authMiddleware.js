@@ -1,36 +1,34 @@
-const formatResponse = require("../helpers/serverResponse");
 const jwt = require("jsonwebtoken");
+const formatResponse = require("../helpers/serverResponse");
 const { key } = require("../../config/jwtKey");
+const User = require("../models/User");
 
 exports.allowAccess = function (roles) {
-  return function (req, res, next) {
+  return async function (req, res, next) {
     try {
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
         return res
           .status(401)
-          .send(
-            formatResponse(null, "Token not found", "User is not authorized")
-          );
+          .send(formatResponse(null, "Token not found", null));
       }
-      const { role: userRole } = jwt.verify(token, key);
+      const { id: userId, role: userRole } = jwt.verify(token, key);
       const allowAccess = roles.includes(userRole);
-      if (!allowAccess) {
+      const currentUser = await User.findById(userId);
+      if (!currentUser) {
         return res
           .status(401)
-          .send(
-            formatResponse(
-              null,
-              "User have no access",
-              "User is not authorized to view this data"
-            )
-          );
+          .send(formatResponse(null, "User not found", null));
       }
+      if (!allowAccess) {
+        return res
+          .status(403)
+          .send(formatResponse(null, "User have no access", null));
+      }
+      req.user = currentUser;
       next();
     } catch (err) {
-      return res
-        .status(401)
-        .send(formatResponse(null, err, "Authorization error"));
+      return res.status(401).send(formatResponse(null, err, null));
     }
   };
 };

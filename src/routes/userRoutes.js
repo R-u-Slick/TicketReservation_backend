@@ -21,11 +21,9 @@ router.post("/user", async (req, res) => {
     return res.status(201).send(formatResponse(null, null, "Data saved to DB"));
   } catch (err) {
     if (err.code === 11000) {
-      return res
-        .status(400)
-        .send(formatResponse(null, err, "User with this email already exists"));
+      return res.status(400).send(formatResponse(null, err, null));
     }
-    return res.status(400).send(formatResponse(null, err.errors, err.message));
+    return res.status(400).send(formatResponse(null, err.errors, null));
   }
 });
 // Get a list of all existing users
@@ -34,9 +32,7 @@ router.get("/user", authMiddleware.allowAccess(["admin"]), async (req, res) => {
     const users = await User.find({});
     return res.status(200).send(formatResponse(users, null, "Users list sent"));
   } catch (err) {
-    return res
-      .status(400)
-      .send(formatResponse(null, err, "Can't get a user list"));
+    return res.status(400).send(formatResponse(null, err, null));
   }
 });
 // Delete an existing user
@@ -55,16 +51,10 @@ router.delete(
       return res
         .status(404)
         .send(
-          formatResponse(
-            null,
-            "Invalid email",
-            `User with email ${email} doesn't exist`
-          )
+          formatResponse(null, `User with email ${email} doesn't exist`, null)
         );
     } catch (err) {
-      return res
-        .status(400)
-        .send(formatResponse(null, err, "User deletion error"));
+      return res.status(400).send(formatResponse(null, err, null));
     }
   }
 );
@@ -86,8 +76,8 @@ router.patch(
           .send(
             formatResponse(
               null,
-              "Invalid email",
-              `User with email ${filter} doesn't exist`
+              `User with email ${filter} doesn't exist`,
+              null
             )
           );
       }
@@ -95,9 +85,7 @@ router.patch(
         .status(200)
         .send(formatResponse(doc, null, "User successfully updated"));
     } catch (err) {
-      return res
-        .status(400)
-        .send(formatResponse(null, err, "User patch error"));
+      return res.status(400).send(formatResponse(null, err, null));
     }
   }
 );
@@ -110,11 +98,7 @@ router.post("/login", async (req, res) => {
       return res
         .status(404)
         .send(
-          formatResponse(
-            null,
-            "Invalid email",
-            `User with email ${email} doesn't exist`
-          )
+          formatResponse(null, `User with email ${email} doesn't exist`, null)
         );
     }
     const validPassword = userController.validatePassword(
@@ -123,36 +107,31 @@ router.post("/login", async (req, res) => {
     );
     if (!validPassword) {
       return res
-        .status(401)
-        .send(formatResponse(null, "Invalid password", "Invalid password"));
+        .status(400)
+        .send(formatResponse(null, "Invalid password", null));
     }
     const token = userController.generateAccessToken(user._id, user.role);
     return res
       .status(200)
       .send(formatResponse({ token, user }, null, "Login successful"));
   } catch (err) {
-    return res.status(400).send(formatResponse(null, err, "Login error"));
+    return res.status(400).send(formatResponse(null, err, null));
   }
 });
 //request user data
-router.get("/users/me", async (req, res) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    if (!token) {
+router.get(
+  "/users/me",
+  authMiddleware.allowAccess(["admin", "client"]),
+  async (req, res) => {
+    try {
+      const currentUser = req.user;
       return res
-        .status(401)
-        .send(
-          formatResponse(null, "Token not found", "User is not authorized")
-        );
+        .status(200)
+        .send(formatResponse(currentUser, null, "User data sent"));
+    } catch (err) {
+      return res.status(400).status(formatResponse(null, err, null));
     }
-    const { id: userId } = jwt.verify(token, key);
-    const user = await User.findById(userId);
-    return res.status(200).send(formatResponse(user, null, "User data sent"));
-  } catch (err) {
-    return res
-      .status(400)
-      .status(formatResponse(null, err, "user data request error"));
   }
-});
+);
 
 module.exports = router;
