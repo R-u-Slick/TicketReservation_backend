@@ -13,6 +13,9 @@ router.post("/user", async (req, res) => {
   try {
     const userData = req.body;
     const { password } = userData;
+    if (password.length<6) {
+      return res.status(400).send(formatResponse(null, 'Password must be at least 6 characters long', null))
+    } 
     if (password.length >= 6) {
       userData.password = userController.passwordHash(password);
     }
@@ -21,7 +24,7 @@ router.post("/user", async (req, res) => {
     return res.status(201).send(formatResponse(null, null, "Data saved to DB"));
   } catch (err) {
     if (err.code === 11000) {
-      return res.status(400).send(formatResponse(null, err, null));
+      return res.status(400).send(formatResponse(null, "Email must be unique", null));
     }
     return res.status(400).send(formatResponse(null, err.errors, null));
   }
@@ -92,7 +95,8 @@ router.patch(
 // User login
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+   const { email, password } = req.body;
+    
     const user = await User.findOne({ email });
     if (!user) {
       return res
@@ -110,7 +114,7 @@ router.post("/login", async (req, res) => {
         .status(400)
         .send(formatResponse(null, "Invalid password", null));
     }
-    const token = userController.generateAccessToken(user._id, user.role);
+    const token = 'Bearer ' + userController.generateAccessToken(user._id, user.role);
     return res
       .status(200)
       .send(formatResponse({ token, user }, null, "Login successful"));
