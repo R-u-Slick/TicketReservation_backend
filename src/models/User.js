@@ -41,7 +41,11 @@ const userSchema = new Schema(
       required: [true, "Please enter a password"],
     },
     role: { type: String, required: true },
-    city: { type: String, required: [true, "Please enter your city"] },
+    city: {
+      type: Schema.Types.ObjectId,
+      ref: "City",
+      required: [true, "Please enter your city"],
+    },
   },
   { timestamps: true }
 );

@@ -14,5 +14,5 @@ exports.validatePassword = (password, hash) => {
 
 exports.generateAccessToken = (id, role) => {
   const payload = { id, role };
-  return jwt.sign(payload, key, { expiresIn: "24h" });
+  return jwt.sign(payload, key, { expiresIn: "224h" });
 };
