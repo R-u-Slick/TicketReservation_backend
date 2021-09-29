@@ -1,13 +1,17 @@
 const { Router } = require("express");
 const City = require("../models/City");
 const Country = require("../models/Country");
+const User = require("../models/User");
 const Actor = require("../models/Actor");
 const Genre = require("../models/Genre");
+const Film = require("../models/Film");
 const {
   countriesData,
   citiesData,
+  usersData,
   actorsData,
   genresData,
+  filmsData,
 } = require("../data/data");
 const formatResponse = require("../helpers/serverResponse");
 
@@ -39,8 +43,10 @@ router.get("/dbinit", async (req, res) => {
     if (await emptyCheck(modelsArray)) {
       dbFill(countriesData, Country);
       dbFill(citiesData, City);
+      dbFill(usersData, User);
       dbFill(actorsData, Actor);
       dbFill(genresData, Genre);
+      dbFill(filmsData, Film);
       return res
         .status(201)
         .send(formatResponse(null, null, "DB successfully initialized"));

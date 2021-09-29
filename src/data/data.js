@@ -3,6 +3,19 @@ const mongoose = require("mongoose");
 const belarusId = mongoose.Types.ObjectId();
 const ukraineId = mongoose.Types.ObjectId();
 const russiaId = mongoose.Types.ObjectId();
+const minskId = mongoose.Types.ObjectId();
+const kievId = mongoose.Types.ObjectId();
+const moscowId = mongoose.Types.ObjectId();
+const dramaId = mongoose.Types.ObjectId();
+const actionId = mongoose.Types.ObjectId();
+const comedyId = mongoose.Types.ObjectId();
+const fantasyId = mongoose.Types.ObjectId();
+const horrorId = mongoose.Types.ObjectId();
+const mysteryId = mongoose.Types.ObjectId();
+const thrillerId = mongoose.Types.ObjectId();
+const pupkinId = mongoose.Types.ObjectId();
+const grigorievId = mongoose.Types.ObjectId();
+const vorobeyId = mongoose.Types.ObjectId();
 
 const countriesData = [
   { _id: belarusId, name: "Belarus" },
@@ -11,28 +24,137 @@ const countriesData = [
 ];
 
 const citiesData = [
-  { name: "Minsk", countryId: belarusId },
-  { name: "Kiev", countryId: ukraineId },
-  { name: "Moscow", countryId: russiaId },
+  { _id: minskId, name: "Minsk", countryId: belarusId },
+  { _id: kievId, name: "Kiev", countryId: ukraineId },
+  { _id: moscowId, name: "Moscow", countryId: russiaId },
+];
+
+const usersData = [
+  {
+    firstName: "client",
+    lastName: "client",
+    email: "client@gmail.com",
+    password: "$2a$07$T4RNCaD95YJoH.m.uMszB.0oXd51totBfSpLHXt8jUWITvXrBPnxi",
+    role: "client",
+    city: minskId,
+  },
+  {
+    firstName: "admin",
+    lastName: "admin",
+    email: "admin@gmail.com",
+    password: "$2a$07$T4RNCaD95YJoH.m.uMszB.0oXd51totBfSpLHXt8jUWITvXrBPnxi",
+    role: "admin",
+    city: minskId,
+  },
 ];
 
 const actorsData = [
-  { firstName: "Vasiliy", lastName: "Pupkin", countryId: belarusId },
-  { firstName: "Grigory", lastName: "Grigoriev", countryId: ukraineId },
-  { firstName: "Andrey", lastName: "Vorobey", countryId: russiaId },
+  {
+    _id: pupkinId,
+    firstName: "Vasiliy",
+    lastName: "Pupkin",
+    countryId: belarusId,
+  },
+  {
+    _id: grigorievId,
+    firstName: "Grigory",
+    lastName: "Grigoriev",
+    countryId: ukraineId,
+  },
+  {
+    _id: vorobeyId,
+    firstName: "Andrey",
+    lastName: "Vorobey",
+    countryId: russiaId,
+  },
 ];
 
 const genresData = [
-  { name: "drama" },
-  { name: "action" },
-  { name: "comedy" },
-  { name: "fantasy" },
-  { name: "horror" },
-  { name: "mystery" },
-  { name: "thriller" },
+  { _id: dramaId, name: "drama" },
+  { _id: actionId, name: "action" },
+  { _id: comedyId, name: "comedy" },
+  { _id: fantasyId, name: "fantasy" },
+  { _id: horrorId, name: "horror" },
+  { _id: mysteryId, name: "mystery" },
+  { _id: thrillerId, name: "thriller" },
+];
+
+const filmsData = [
+  {
+    name: "jaws",
+    genreId: thrillerId,
+    duration: 124,
+    description:
+      "When a killer shark unleashes chaos on a beach community, it's up to a local sheriff, a marine biologist, and an old seafarer to hunt the beast down.",
+    image:
+      "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/c11f66ec0451a36f5aae494b1509b069_bf869227-c34a-449c-83ff-ed093d341dd3_480x.progressive.jpg?v=1573616179",
+    actorsId: [pupkinId, grigorievId, vorobeyId],
+  },
+  {
+    name: "Avengers: Infinity War",
+    genreId: actionId,
+    duration: 149,
+    description:
+      "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+    image:
+      "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/avengers-infinity-war_89e0d364_480x.progressive.jpg?v=1631200474",
+    actorsId: [pupkinId, grigorievId, vorobeyId],
+  },
+  {
+    name: "Pulp fiction",
+    genreId: actionId,
+    duration: 154,
+    description:
+      "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    image:
+      "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/950e439404c3d5eddd86ae876cec83bf_949b5045-2503-4883-bcd2-ff1f31f5b14c_480x.progressive.jpg?v=1573588746",
+    actorsId: [pupkinId, grigorievId, vorobeyId],
+  },
+  {
+    name: "Back to future",
+    genreId: fantasyId,
+    duration: 116,
+    description:
+      "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the eccentric scientist Doc Brown.",
+    image:
+      "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/9d8e73e436b536a7c81644c6e9877c7a_1c9d0f90-9991-4326-8f37-3dd980abeacf_480x.progressive.jpg?v=1573590262",
+    actorsId: [pupkinId, grigorievId, vorobeyId],
+  },
+  {
+    name: "Jurassic Park",
+    genreId: actionId,
+    duration: 127,
+    description:
+      "A pragmatic paleontologist visiting an almost complete theme park is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
+    image:
+      "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/4940c5878babf3dc5d2ca567b7558178_9e62fc4c-4116-48e5-a4f5-3a99c73ae7b1_480x.progressive.jpg?v=1573651499",
+    actorsId: [pupkinId, grigorievId, vorobeyId],
+  },
+  {
+    name: "No Time to Die",
+    genreId: actionId,
+    duration: 163,
+    description:
+      "James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.",
+    image:
+      "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/received_188443509130467_480x.progressive.jpg?v=1583518859",
+    actorsId: [pupkinId, grigorievId, vorobeyId],
+  },
+  {
+    name: "Star wars: a new hope",
+    genreId: fantasyId,
+    duration: 121,
+    description:
+      "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
+    image:
+      "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/23fd3ba334c1e8e84c96906497d577bf_6d652cf7-d705-42d2-96aa-2c3963f8a178_480x.progressive.jpg?v=1573613876",
+    actorsId: [pupkinId, grigorievId, vorobeyId],
+  },
 ];
 
 exports.countriesData = countriesData;
 exports.citiesData = citiesData;
+exports.usersData = usersData;
 exports.actorsData = actorsData;
 exports.genresData = genresData;
+exports.filmsData = filmsData;
