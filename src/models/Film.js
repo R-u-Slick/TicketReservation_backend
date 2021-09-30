@@ -6,7 +6,7 @@ const filmSchema = new Schema({
   duration: { type: Number, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
-  actorsId: [{ type: Schema.Types.ObjectId, ref: "Actor" }],
+  actors: [{ type: Schema.Types.ObjectId, ref: "Actor" }],
 });
 
 module.exports = model("Film", filmSchema);

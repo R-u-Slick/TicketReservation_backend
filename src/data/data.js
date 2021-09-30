@@ -81,14 +81,14 @@ const genresData = [
 
 const filmsData = [
   {
-    name: "jaws",
+    name: "Jaws",
     genreId: thrillerId,
     duration: 124,
     description:
       "When a killer shark unleashes chaos on a beach community, it's up to a local sheriff, a marine biologist, and an old seafarer to hunt the beast down.",
     image:
       "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/c11f66ec0451a36f5aae494b1509b069_bf869227-c34a-449c-83ff-ed093d341dd3_480x.progressive.jpg?v=1573616179",
-    actorsId: [pupkinId, grigorievId, vorobeyId],
+    actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
     name: "Avengers: Infinity War",
@@ -98,7 +98,7 @@ const filmsData = [
       "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
     image:
       "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/avengers-infinity-war_89e0d364_480x.progressive.jpg?v=1631200474",
-    actorsId: [pupkinId, grigorievId, vorobeyId],
+    actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
     name: "Pulp fiction",
@@ -108,7 +108,7 @@ const filmsData = [
       "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
     image:
       "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/950e439404c3d5eddd86ae876cec83bf_949b5045-2503-4883-bcd2-ff1f31f5b14c_480x.progressive.jpg?v=1573588746",
-    actorsId: [pupkinId, grigorievId, vorobeyId],
+    actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
     name: "Back to future",
@@ -118,7 +118,7 @@ const filmsData = [
       "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the eccentric scientist Doc Brown.",
     image:
       "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/9d8e73e436b536a7c81644c6e9877c7a_1c9d0f90-9991-4326-8f37-3dd980abeacf_480x.progressive.jpg?v=1573590262",
-    actorsId: [pupkinId, grigorievId, vorobeyId],
+    actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
     name: "Jurassic Park",
@@ -128,7 +128,7 @@ const filmsData = [
       "A pragmatic paleontologist visiting an almost complete theme park is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
     image:
       "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/4940c5878babf3dc5d2ca567b7558178_9e62fc4c-4116-48e5-a4f5-3a99c73ae7b1_480x.progressive.jpg?v=1573651499",
-    actorsId: [pupkinId, grigorievId, vorobeyId],
+    actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
     name: "No Time to Die",
@@ -138,7 +138,7 @@ const filmsData = [
       "James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.",
     image:
       "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/received_188443509130467_480x.progressive.jpg?v=1583518859",
-    actorsId: [pupkinId, grigorievId, vorobeyId],
+    actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
     name: "Star wars: a new hope",
@@ -148,7 +148,7 @@ const filmsData = [
       "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
     image:
       "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/23fd3ba334c1e8e84c96906497d577bf_6d652cf7-d705-42d2-96aa-2c3963f8a178_480x.progressive.jpg?v=1573613876",
-    actorsId: [pupkinId, grigorievId, vorobeyId],
+    actors: [pupkinId, grigorievId, vorobeyId],
   },
 ];
 
