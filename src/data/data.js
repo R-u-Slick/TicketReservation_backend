@@ -16,6 +16,8 @@ const thrillerId = mongoose.Types.ObjectId();
 const pupkinId = mongoose.Types.ObjectId();
 const grigorievId = mongoose.Types.ObjectId();
 const vorobeyId = mongoose.Types.ObjectId();
+const avroraHallOneId = mongoose.Types.ObjectId();
+const regularSeatId = mongoose.Types.ObjectId();
 
 const countriesData = [
   { _id: belarusId, name: "Belarus" },
@@ -70,19 +72,19 @@ const actorsData = [
 ];
 
 const genresData = [
-  { _id: dramaId, name: "drama" },
-  { _id: actionId, name: "action" },
-  { _id: comedyId, name: "comedy" },
-  { _id: fantasyId, name: "fantasy" },
-  { _id: horrorId, name: "horror" },
-  { _id: mysteryId, name: "mystery" },
-  { _id: thrillerId, name: "thriller" },
+  { _id: dramaId, name: "Drama" },
+  { _id: actionId, name: "Action" },
+  { _id: comedyId, name: "Comedy" },
+  { _id: fantasyId, name: "Fantasy" },
+  { _id: horrorId, name: "Horror" },
+  { _id: mysteryId, name: "Mystery" },
+  { _id: thrillerId, name: "Thriller" },
 ];
 
 const filmsData = [
   {
     name: "Jaws",
-    genreId: thrillerId,
+    genre: thrillerId,
     duration: 124,
     description:
       "When a killer shark unleashes chaos on a beach community, it's up to a local sheriff, a marine biologist, and an old seafarer to hunt the beast down.",
@@ -92,7 +94,7 @@ const filmsData = [
   },
   {
     name: "Avengers: Infinity War",
-    genreId: actionId,
+    genre: actionId,
     duration: 149,
     description:
       "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
@@ -102,7 +104,7 @@ const filmsData = [
   },
   {
     name: "Pulp fiction",
-    genreId: actionId,
+    genre: actionId,
     duration: 154,
     description:
       "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
@@ -111,8 +113,8 @@ const filmsData = [
     actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
-    name: "Back to future",
-    genreId: fantasyId,
+    name: "Back to the future",
+    genre: fantasyId,
     duration: 116,
     description:
       "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the eccentric scientist Doc Brown.",
@@ -122,7 +124,7 @@ const filmsData = [
   },
   {
     name: "Jurassic Park",
-    genreId: actionId,
+    genre: actionId,
     duration: 127,
     description:
       "A pragmatic paleontologist visiting an almost complete theme park is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
@@ -132,7 +134,7 @@ const filmsData = [
   },
   {
     name: "No Time to Die",
-    genreId: actionId,
+    genre: actionId,
     duration: 163,
     description:
       "James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.",
@@ -142,13 +144,44 @@ const filmsData = [
   },
   {
     name: "Star wars: a new hope",
-    genreId: fantasyId,
+    genre: fantasyId,
     duration: 121,
     description:
       "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
     image:
       "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/23fd3ba334c1e8e84c96906497d577bf_6d652cf7-d705-42d2-96aa-2c3963f8a178_480x.progressive.jpg?v=1573613876",
     actors: [pupkinId, grigorievId, vorobeyId],
+  },
+];
+
+const cinemasData = [
+  {
+    name: "Avrora",
+    city: minskId,
+    image:
+      "https://abws.bycard.by/uploads/objects/thumbs/420x300/1nazyLljj.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean condimentum quis ipsum a consectetur. Suspendisse nec vehicula mauris, sit amet tristique augue. In purus nunc, accumsan ut ligula lobortis, rhoncus ullamcorper dolor. Nullam ultrices accumsan erat, nec posuere diam venenatis non. Sed fringilla eros id enim efficitur finibus. Proin nec tempor turpis, at vulputate quam. Praesent tincidunt orci vitae elementum facilisis. Mauris ex metus, iaculis eu fringilla eget, aliquet vel arcu. Nam finibus vehicula eleifend. Phasellus lobortis, dui a efficitur accumsan, odio elit commodo ex, non laoreet elit felis et metus. Vivamus in elit rhoncus, maximus tellus in, accumsan dolor. Phasellus vitae pretium elit, eget maximus nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus posuere mi non porta finibus.",
+    halls: [avroraHallOneId],
+  },
+];
+
+const hallsData = [
+  {
+    _id: avroraHallOneId,
+    name: "Hall №1",
+    plan: [
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+    ],
+  },
+];
+
+const seatsData = [
+  {
+    _id: regularSeatId,
+    name: "regular",
+    color: "gray",
   },
 ];
 
