@@ -17,7 +17,13 @@ const pupkinId = mongoose.Types.ObjectId();
 const grigorievId = mongoose.Types.ObjectId();
 const vorobeyId = mongoose.Types.ObjectId();
 const avroraHallOneId = mongoose.Types.ObjectId();
+const avroraHallTwoId = mongoose.Types.ObjectId();
+const kievHallOneId = mongoose.Types.ObjectId();
+const kievHallTwoId = mongoose.Types.ObjectId();
+const moscowHallOneId = mongoose.Types.ObjectId();
+const moscowHallTwoId = mongoose.Types.ObjectId();
 const regularSeatId = mongoose.Types.ObjectId();
+const loveSeatId = mongoose.Types.ObjectId();
 
 const countriesData = [
   { _id: belarusId, name: "Belarus" },
@@ -161,7 +167,25 @@ const cinemasData = [
     image:
       "https://abws.bycard.by/uploads/objects/thumbs/420x300/1nazyLljj.jpg",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean condimentum quis ipsum a consectetur. Suspendisse nec vehicula mauris, sit amet tristique augue. In purus nunc, accumsan ut ligula lobortis, rhoncus ullamcorper dolor. Nullam ultrices accumsan erat, nec posuere diam venenatis non. Sed fringilla eros id enim efficitur finibus. Proin nec tempor turpis, at vulputate quam. Praesent tincidunt orci vitae elementum facilisis. Mauris ex metus, iaculis eu fringilla eget, aliquet vel arcu. Nam finibus vehicula eleifend. Phasellus lobortis, dui a efficitur accumsan, odio elit commodo ex, non laoreet elit felis et metus. Vivamus in elit rhoncus, maximus tellus in, accumsan dolor. Phasellus vitae pretium elit, eget maximus nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus posuere mi non porta finibus.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean condimentum quis ipsum a consectetur. Suspendisse nec vehicula mauris, sit amet tristique augue. In purus nunc, accumsan ut ligula lobortis, rhoncus ullamcorper dolor. Nullam ultrices accumsan erat, nec posuere diam venenatis non. Sed fringilla eros id enim efficitur finibus. ",
+    halls: [avroraHallOneId, avroraHallTwoId],
+  },
+  {
+    name: "Kiev",
+    city: kievId,
+    image:
+      "https://abws.bycard.by/uploads/objects/thumbs/420x300/1Z55wwgRY.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean condimentum quis ipsum a consectetur. Suspendisse nec vehicula mauris, sit amet tristique augue. In purus nunc, accumsan ut ligula lobortis, rhoncus ullamcorper dolor. Nullam ultrices accumsan erat, nec posuere diam venenatis non. Sed fringilla eros id enim efficitur finibus. ",
+    halls: [avroraHallOneId],
+  },
+  {
+    name: "Moscow",
+    city: moscowId,
+    image:
+      "https://abws.bycard.by/uploads/objects/thumbs/420x300/3Crfzl0WR.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean condimentum quis ipsum a consectetur. Suspendisse nec vehicula mauris, sit amet tristique augue. In purus nunc, accumsan ut ligula lobortis, rhoncus ullamcorper dolor. Nullam ultrices accumsan erat, nec posuere diam venenatis non. Sed fringilla eros id enim efficitur finibus. ",
     halls: [avroraHallOneId],
   },
 ];
@@ -175,13 +199,68 @@ const hallsData = [
       [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
     ],
   },
+  {
+    _id: avroraHallTwoId,
+    name: "Hall №2",
+    plan: [
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [loveSeatId, loveSeatId],
+    ],
+  },
+  {
+    _id: kievHallOneId,
+    name: "Hall №1",
+    plan: [
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [loveSeatId, loveSeatId],
+    ],
+  },
+  {
+    _id: kievHallTwoId,
+    name: "Hall №2",
+    plan: [
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+    ],
+  },
+  {
+    _id: moscowHallOneId,
+    name: "Hall №1",
+    plan: [
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [loveSeatId, loveSeatId],
+    ],
+  },
+  {
+    _id: moscowHallTwoId,
+    name: "Hall №2",
+    plan: [
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [regularSeatId, regularSeatId, regularSeatId, regularSeatId],
+      [loveSeatId, loveSeatId],
+      [loveSeatId, loveSeatId],
+    ],
+  },
 ];
 
 const seatsData = [
   {
     _id: regularSeatId,
-    name: "regular",
+    name: "Regular seat",
     color: "gray",
+    capacity: "1",
+  },
+  {
+    _id: loveSeatId,
+    name: "Love seat",
+    color: "purple",
+    capacity: "2",
   },
 ];
 
@@ -191,3 +270,6 @@ exports.usersData = usersData;
 exports.actorsData = actorsData;
 exports.genresData = genresData;
 exports.filmsData = filmsData;
+exports.cinemasData = cinemasData;
+exports.hallsData = hallsData;
+exports.seatsData = seatsData;

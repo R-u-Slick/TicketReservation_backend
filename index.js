@@ -4,6 +4,7 @@ const dbinitRoute = require("./src/routes/dbinitRoute");
 const userRoutes = require("./src/routes/userRoutes");
 const cityRoutes = require("./src/routes/cityRoutes");
 const filmRoutes = require("./src/routes/filmRoutes");
+const cinemaRoutes = require("./src/routes/cinemaRoutes");
 const { runDatabase } = require("./config/db");
 
 const PORT = 3000;
@@ -14,6 +15,7 @@ app.use(dbinitRoute);
 app.use(userRoutes);
 app.use(cityRoutes);
 app.use(filmRoutes);
+app.use(cinemaRoutes);
 
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}...`);
