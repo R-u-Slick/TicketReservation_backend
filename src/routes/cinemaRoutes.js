@@ -8,8 +8,15 @@ const router = Router();
 router.get("/cinema", async (req, res) => {
   try {
     const cinemas = await Cinema.find({})
-      .populate({ path: "city" })
-      .populate({ path: "halls" });
+      .populate({
+        path: "halls",
+        model: "Hall",
+        populate: {
+          path: "plan",
+          model: "Seat",
+        },
+      })
+      .populate({ path: "city" });
     return res
       .status(200)
       .send(formatResponse(cinemas, null, "Cinemas list sent"));
