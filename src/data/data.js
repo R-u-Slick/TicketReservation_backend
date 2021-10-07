@@ -177,7 +177,7 @@ const cinemasData = [
       "https://abws.bycard.by/uploads/objects/thumbs/420x300/1Z55wwgRY.jpg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean condimentum quis ipsum a consectetur. Suspendisse nec vehicula mauris, sit amet tristique augue. In purus nunc, accumsan ut ligula lobortis, rhoncus ullamcorper dolor. Nullam ultrices accumsan erat, nec posuere diam venenatis non. Sed fringilla eros id enim efficitur finibus. ",
-    halls: [avroraHallOneId],
+    halls: [kievHallOneId, kievHallTwoId],
   },
   {
     name: "Moscow",
@@ -186,7 +186,7 @@ const cinemasData = [
       "https://abws.bycard.by/uploads/objects/thumbs/420x300/3Crfzl0WR.jpg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean condimentum quis ipsum a consectetur. Suspendisse nec vehicula mauris, sit amet tristique augue. In purus nunc, accumsan ut ligula lobortis, rhoncus ullamcorper dolor. Nullam ultrices accumsan erat, nec posuere diam venenatis non. Sed fringilla eros id enim efficitur finibus. ",
-    halls: [avroraHallOneId],
+    halls: [moscowHallOneId, moscowHallTwoId],
   },
 ];
 
@@ -279,13 +279,13 @@ const seatsData = [
   {
     _id: regularSeatId,
     name: "Regular seat",
-    color: "gray",
+    color: "#C4C4C4",
     capacity: "1",
   },
   {
     _id: loveSeatId,
     name: "Love seat",
-    color: "purple",
+    color: "#E10050",
     capacity: "2",
   },
 ];
