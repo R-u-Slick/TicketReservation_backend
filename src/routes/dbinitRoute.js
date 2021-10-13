@@ -5,6 +5,10 @@ const User = require("../models/User");
 const Actor = require("../models/Actor");
 const Genre = require("../models/Genre");
 const Film = require("../models/Film");
+const Cinema = require("../models/Cinema");
+const Hall = require("../models/Hall");
+const Seat = require("../models/Seat");
+
 const {
   countriesData,
   citiesData,
@@ -12,6 +16,9 @@ const {
   actorsData,
   genresData,
   filmsData,
+  cinemasData,
+  hallsData,
+  seatsData,
 } = require("../data/data");
 const formatResponse = require("../helpers/serverResponse");
 
@@ -47,6 +54,10 @@ router.get("/dbinit", async (req, res) => {
       dbFill(actorsData, Actor);
       dbFill(genresData, Genre);
       dbFill(filmsData, Film);
+      dbFill(cinemasData, Cinema);
+      dbFill(hallsData, Hall);
+      dbFill(seatsData, Seat);
+
       return res
         .status(201)
         .send(formatResponse(null, null, "DB successfully initialized"));

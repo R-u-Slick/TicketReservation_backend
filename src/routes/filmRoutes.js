@@ -7,7 +7,9 @@ const router = Router();
 // Get a list of all cities
 router.get("/film", async (req, res) => {
   try {
-    const films = await Film.find({}).populate("genreId");
+    const films = await Film.find({})
+      .populate({ path: "actors" })
+      .populate({ path: "genre" });
     return res.status(200).send(formatResponse(films, null, "Films list sent"));
   } catch (err) {
     return res.status(400).send(formatResponse(null, err, null));

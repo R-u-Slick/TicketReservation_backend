@@ -3,8 +3,6 @@ const userController = require("../controllers/userController");
 const authMiddleware = require("../middleware/authMiddleware");
 const formatResponse = require("../helpers/serverResponse");
 const User = require("../models/User");
-const jwt = require("jsonwebtoken");
-const { key } = require("../../config/jwtKey");
 
 const router = Router();
 
@@ -14,19 +12,17 @@ router.post("/user", async (req, res) => {
     const userData = req.body;
     const { password } = userData;
     if (password.length < 6) {
-      return res
-        .status(400)
-        .send(
-          formatResponse(
-            null,
-            {
-              password: {
-                message: "Password must be at least 6 characters long",
-              },
+      return res.status(400).send(
+        formatResponse(
+          null,
+          {
+            password: {
+              message: "Password must be at least 6 characters long",
             },
-            null
-          )
-        );
+          },
+          null
+        )
+      );
     }
     if (password.length >= 6) {
       userData.password = userController.passwordHash(password);
