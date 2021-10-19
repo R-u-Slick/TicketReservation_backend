@@ -75,5 +75,22 @@ router.delete(
     }
   }
 );
+//create a new cinema
+router.post(
+  "/cinema",
+  authMiddleware.allowAccess(["admin"]),
+  async (req, res) => {
+    try {
+      const cinemaData = req.body;
+      const newCinema = new Cinema(cinemaData);
+      await newCinema.save();
+      return res
+        .status(201)
+        .send(formatResponse(newCinema._id, null, "Data saved to DB"));
+    } catch (err) {
+      return res.status(400).send(formatResponse(null, err, null));
+    }
+  }
+);
 
 module.exports = router;
