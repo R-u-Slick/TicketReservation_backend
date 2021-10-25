@@ -8,6 +8,10 @@ const Film = require("../models/Film");
 const Cinema = require("../models/Cinema");
 const Hall = require("../models/Hall");
 const Seat = require("../models/Seat");
+const Session = require("../models/Session");
+const Good = require("../models/Good");
+const GoodPrice = require("../models/GoodPrice");
+const SeatPrice = require("../models/SeatPrice");
 
 const {
   countriesData,
@@ -19,6 +23,10 @@ const {
   cinemasData,
   hallsData,
   seatsData,
+  sessionsData,
+  goodsData,
+  goodsPriceData,
+  seatsPriceData,
 } = require("../data/data");
 const formatResponse = require("../helpers/serverResponse");
 
@@ -57,6 +65,10 @@ router.get("/dbinit", async (req, res) => {
       dbFill(cinemasData, Cinema);
       dbFill(hallsData, Hall);
       dbFill(seatsData, Seat);
+      dbFill(sessionsData, Session);
+      dbFill(goodsData, Good);
+      dbFill(goodsPriceData, GoodPrice);
+      dbFill(seatsPriceData, SeatPrice);
 
       return res
         .status(201)

@@ -24,6 +24,33 @@ const moscowHallOneId = mongoose.Types.ObjectId();
 const moscowHallTwoId = mongoose.Types.ObjectId();
 const regularSeatId = mongoose.Types.ObjectId();
 const loveSeatId = mongoose.Types.ObjectId();
+const avroraId = mongoose.Types.ObjectId();
+const kievCinemaId = mongoose.Types.ObjectId();
+const moscowCinemaId = mongoose.Types.ObjectId();
+const jawsId = mongoose.Types.ObjectId();
+const avengersId = mongoose.Types.ObjectId();
+const pulpFictionId = mongoose.Types.ObjectId();
+const backToFutureId = mongoose.Types.ObjectId();
+const jurassicParkId = mongoose.Types.ObjectId();
+const noTimeToDieId = mongoose.Types.ObjectId();
+const starWarsId = mongoose.Types.ObjectId();
+const popcornId = mongoose.Types.ObjectId();
+const colaId = mongoose.Types.ObjectId();
+const chipsId = mongoose.Types.ObjectId();
+const avroraSessionSeatPrice = mongoose.Types.ObjectId();
+const kievSessionRegularSeatPrice = mongoose.Types.ObjectId();
+const kievSessionLoveSeatPrice = mongoose.Types.ObjectId();
+const moscowSessionRegularSeatPrice = mongoose.Types.ObjectId();
+const moscowSessionLoveSeatPrice = mongoose.Types.ObjectId();
+const avroraPopcornPrice = mongoose.Types.ObjectId();
+const avroraColaPrice = mongoose.Types.ObjectId();
+const avroraChipsPrice = mongoose.Types.ObjectId();
+const kievPopcornPrice = mongoose.Types.ObjectId();
+const kievColaPrice = mongoose.Types.ObjectId();
+const kievChipsPrice = mongoose.Types.ObjectId();
+const moscowPopcornPrice = mongoose.Types.ObjectId();
+const moscowColaPrice = mongoose.Types.ObjectId();
+const moscowChipsPrice = mongoose.Types.ObjectId();
 
 const countriesData = [
   { _id: belarusId, name: "Belarus" },
@@ -89,6 +116,7 @@ const genresData = [
 
 const filmsData = [
   {
+    _id: jawsId,
     name: "Jaws",
     genre: thrillerId,
     duration: 124,
@@ -99,6 +127,7 @@ const filmsData = [
     actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
+    _id: avengersId,
     name: "Avengers: Infinity War",
     genre: actionId,
     duration: 149,
@@ -109,6 +138,7 @@ const filmsData = [
     actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
+    _id: pulpFictionId,
     name: "Pulp fiction",
     genre: actionId,
     duration: 154,
@@ -119,6 +149,7 @@ const filmsData = [
     actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
+    _id: backToFutureId,
     name: "Back to the future",
     genre: fantasyId,
     duration: 116,
@@ -129,6 +160,7 @@ const filmsData = [
     actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
+    _id: jurassicParkId,
     name: "Jurassic Park",
     genre: actionId,
     duration: 127,
@@ -139,6 +171,7 @@ const filmsData = [
     actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
+    _id: noTimeToDieId,
     name: "No Time to Die",
     genre: actionId,
     duration: 163,
@@ -149,6 +182,7 @@ const filmsData = [
     actors: [pupkinId, grigorievId, vorobeyId],
   },
   {
+    _id: starWarsId,
     name: "Star wars: a new hope",
     genre: fantasyId,
     duration: 121,
@@ -162,6 +196,7 @@ const filmsData = [
 
 const cinemasData = [
   {
+    _id: avroraId,
     name: "Avrora",
     city: minskId,
     image:
@@ -171,6 +206,7 @@ const cinemasData = [
     halls: [avroraHallOneId, avroraHallTwoId],
   },
   {
+    _id: kievCinemaId,
     name: "Kiev",
     city: kievId,
     image:
@@ -180,6 +216,7 @@ const cinemasData = [
     halls: [kievHallOneId, kievHallTwoId],
   },
   {
+    _id: moscowCinemaId,
     name: "Moscow",
     city: moscowId,
     image:
@@ -290,6 +327,129 @@ const seatsData = [
   },
 ];
 
+const goodsData = [
+  {
+    _id: popcornId,
+    name: "popcorn",
+  },
+  {
+    _id: colaId,
+    name: "cola",
+  },
+  {
+    _id: chipsId,
+    name: "chips",
+  },
+];
+
+const goodsPriceData = [
+  {
+    _id: avroraPopcornPrice,
+    good: popcornId,
+    price: 2,
+  },
+  {
+    _id: avroraColaPrice,
+    good: colaId,
+    price: 2.5,
+  },
+  {
+    _id: avroraChipsPrice,
+    good: chipsId,
+    price: 3,
+  },
+  {
+    _id: kievPopcornPrice,
+    good: popcornId,
+    price: 2,
+  },
+  {
+    _id: kievColaPrice,
+    good: colaId,
+    price: 2.5,
+  },
+  {
+    _id: kievChipsPrice,
+    good: chipsId,
+    price: 3,
+  },
+  {
+    _id: moscowPopcornPrice,
+    good: popcornId,
+    price: 2,
+  },
+  {
+    _id: moscowColaPrice,
+    good: colaId,
+    price: 2.5,
+  },
+  {
+    _id: moscowChipsPrice,
+    good: chipsId,
+    price: 3,
+  },
+];
+
+const seatsPriceData = [
+  {
+    _id: avroraSessionSeatPrice,
+    seat: regularSeatId,
+    includedGoods: [],
+    price: 5,
+  },
+  {
+    _id: kievSessionRegularSeatPrice,
+    seat: regularSeatId,
+    includedGoods: [],
+    price: 5,
+  },
+  {
+    _id: kievSessionLoveSeatPrice,
+    seat: loveSeatId,
+    includedGoods: [popcornId, colaId],
+    price: 10,
+  },
+  {
+    _id: moscowSessionRegularSeatPrice,
+    seat: regularSeatId,
+    includedGoods: [],
+    price: 8,
+  },
+  {
+    _id: moscowSessionLoveSeatPrice,
+    seat: loveSeatId,
+    includedGoods: [popcornId],
+    price: 20,
+  },
+];
+
+const sessionsData = [
+  {
+    cinema: avroraId,
+    film: starWarsId,
+    date: new Date("December 17, 2021 12:00:00"),
+    hall: avroraHallOneId,
+    seatPrice: [avroraSessionSeatPrice],
+    goodPrice: [avroraPopcornPrice, avroraColaPrice, avroraChipsPrice],
+  },
+  {
+    cinema: kievCinemaId,
+    film: jurassicParkId,
+    date: new Date("December 20, 2021 13:30:00"),
+    hall: kievHallOneId,
+    seatPrice: [kievSessionRegularSeatPrice, kievSessionLoveSeatPrice],
+    goodPrice: [kievPopcornPrice, kievColaPrice, kievChipsPrice],
+  },
+  {
+    cinema: moscowCinemaId,
+    film: pulpFictionId,
+    date: new Date("December 25, 2021 20:00:00"),
+    hall: moscowHallOneId,
+    seatPrice: [moscowSessionRegularSeatPrice, moscowSessionLoveSeatPrice],
+    goodPrice: [moscowPopcornPrice, moscowColaPrice, moscowChipsPrice],
+  },
+];
+
 exports.countriesData = countriesData;
 exports.citiesData = citiesData;
 exports.usersData = usersData;
@@ -299,3 +459,7 @@ exports.filmsData = filmsData;
 exports.cinemasData = cinemasData;
 exports.hallsData = hallsData;
 exports.seatsData = seatsData;
+exports.sessionsData = sessionsData;
+exports.goodsData = goodsData;
+exports.goodsPriceData = goodsPriceData;
+exports.seatsPriceData = seatsPriceData;
