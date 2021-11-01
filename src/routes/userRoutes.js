@@ -80,7 +80,7 @@ router.delete(
 // Update an existing user
 router.patch(
   "/user",
-  authMiddleware.allowAccess(["admin"]),
+  authMiddleware.allowAccess(["client", "admin"]),
   async (req, res) => {
     try {
       const filter = req.body.email;

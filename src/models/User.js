@@ -46,6 +46,7 @@ const userSchema = new Schema(
       ref: "City",
       required: [true, "Please enter your city"],
     },
+    orders: [{ type: Schema.Types.ObjectId, required: true, ref: "Order" }],
   },
   { timestamps: true }
 );

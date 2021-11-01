@@ -11,6 +11,7 @@ const sessionSchema = new Schema({
   goodPrice: [
     { type: Schema.Types.ObjectId, required: true, ref: "GoodPrice" },
   ],
+  orders: [{ type: Schema.Types.ObjectId, required: true, ref: "Order" }],
 });
 
 module.exports = model("Session", sessionSchema);

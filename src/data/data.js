@@ -72,6 +72,7 @@ const usersData = [
     password: "$2a$07$T4RNCaD95YJoH.m.uMszB.0oXd51totBfSpLHXt8jUWITvXrBPnxi",
     role: "client",
     city: minskId,
+    orders: [],
   },
   {
     firstName: "admin",
@@ -80,6 +81,7 @@ const usersData = [
     password: "$2a$07$T4RNCaD95YJoH.m.uMszB.0oXd51totBfSpLHXt8jUWITvXrBPnxi",
     role: "admin",
     city: minskId,
+    orders: [],
   },
 ];
 
@@ -431,6 +433,7 @@ const sessionsData = [
     hall: avroraHallOneId,
     seatPrice: [avroraSessionSeatPrice],
     goodPrice: [avroraPopcornPrice, avroraColaPrice, avroraChipsPrice],
+    orders: [],
   },
   {
     cinema: kievCinemaId,
@@ -439,6 +442,7 @@ const sessionsData = [
     hall: kievHallOneId,
     seatPrice: [kievSessionRegularSeatPrice, kievSessionLoveSeatPrice],
     goodPrice: [kievPopcornPrice, kievColaPrice, kievChipsPrice],
+    orders: [],
   },
   {
     cinema: moscowCinemaId,
@@ -447,6 +451,7 @@ const sessionsData = [
     hall: moscowHallOneId,
     seatPrice: [moscowSessionRegularSeatPrice, moscowSessionLoveSeatPrice],
     goodPrice: [moscowPopcornPrice, moscowColaPrice, moscowChipsPrice],
+    orders: [],
   },
 ];
 

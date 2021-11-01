@@ -8,6 +8,7 @@ const cinemaRoutes = require("./src/routes/cinemaRoutes");
 const seatRoutes = require("./src/routes/seatRoutes");
 const hallRoutes = require("./src/routes/hallRoutes");
 const sessionRoutes = require("./src/routes/sessionRoutes");
+const orderRoutes = require("./src/routes/orderRoutes");
 
 const { runDatabase } = require("./config/db");
 
@@ -23,6 +24,7 @@ app.use(cinemaRoutes);
 app.use(seatRoutes);
 app.use(hallRoutes);
 app.use(sessionRoutes);
+app.use(orderRoutes);
 
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}...`);
